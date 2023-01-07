@@ -31,7 +31,6 @@ app.get('/',(req,res)=>{
 
 })
 
-
 app.get('/selecoes',(req,res) =>{
 
     res.status(200).send(selecoes)
@@ -53,6 +52,13 @@ app.delete('/selecoes/:id',(req,res)=>{
     
     selecoes.splice(buscarIndexSelecao(req.params.id),1)
     res.status(201).send(`seleção com ${req.params.id} deletada com sucesso!`)
+})
+
+app.put('/selecoes/:id',(req,res)=>{
+    let index = buscarIndexSelecao(req.params.id)
+    selecoes[index].selecao = req.body.selecao
+    selecoes[index].grupo = req.body.grupo
+    res.json(selecoes)
 })
 
 export default app
